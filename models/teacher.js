@@ -5,12 +5,6 @@ const teacherSchema = new mongoose.Schema({
         type: String,
         required:[true,'Please add a name'],
     },
-
-    teacherId :{
-        type: String,
-        required:[true,'Id is needed'],
-        unique: true
-    },
     subject: {
         type: [String],
         required:[true,'must take a subject']
@@ -27,6 +21,17 @@ const teacherSchema = new mongoose.Schema({
           'Please add a valid email'
         ]
       },
+      password: {
+        type: String,
+        required: [true, 'Please add a password'],
+        minlength: 6,
+    },
+    resetPasswordToken: String,
+      resetPasswordExpire: Date,
+      createdAt: {
+        type: Date,
+        default: Date.now
+    }
 
 })
 

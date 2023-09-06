@@ -5,16 +5,10 @@ const studentSchema = new mongoose.Schema({
         type:String,
         required:[true,'addd name']
     },
-    studentId :{
-        type:String,
-        required:[true,'Id is needed'],
-        unique:true
-    },
     tutionPayment : {
         type:Boolean,
         default: false
     },
-
     subject:{
         type :[{}],
     },
@@ -22,10 +16,17 @@ const studentSchema = new mongoose.Schema({
         type:String,
         required: true
     },
+    isEnrolled:{
+        type: Boolean
+    },
+    ParentName:{
+        type:String,
+        required:true
+    },
     sex:{
         type:String,
         required:[true,'specify gender'],
-        enum:['make','female']
+        enum:['male','female']
 
     },
     photo: {
@@ -36,12 +37,17 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please add a password'],
         minlength: 6,
-        select: false
     },
     resetPasswordToken: String,
       resetPasswordExpire: Date,
       createdAt: {
         type: Date,
         default: Date.now
+    },
+    parent: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Parent'
     }
 })
+
+module.exports = mongoose.model('Student',studentSchema)
